@@ -6,11 +6,21 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
     outline: none;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
-  button {
+  button, a {
     cursor: pointer;
 }
 `
+
+export const colors = {
+  white: "#FFF",
+  black2: "#1e1e1e",
+  purple: "#9758A6",
+  purpleHover: "#6F357C",
+}
 
 export default GlobalStyle
