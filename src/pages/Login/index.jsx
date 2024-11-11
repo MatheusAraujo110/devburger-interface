@@ -1,9 +1,33 @@
+import { useForm } from "react-hook-form"
+import { yupResolver } from "@hookform/resolvers/yup"
+import * as yup from "yup"
+
 import * as S from './styles'
 import Logo from '../../assets/Logo 1.svg'
 
 import { Button } from '../../components/Button'
 
 export function Login() {
+    const schema = yup.object({  // validação dos campos
+        email: yup
+            .string() // se é uma estringe.
+            .email() // 'Digite um email válido'
+            .required(), // 'O email é obrigatório'
+        password: yup
+            .string() // se é uma estringe.
+            .min(6) // 'A senha deve ter pelo menos 6 caracteres' 
+            .required(), // 'A senha é obrigatória'
+    }).required();
+
+    const {
+        register, // Registrar os inputs
+        handleSubmit, // Vai lidar com as informações do formulário
+        formState: { errors },
+    } = useForm({
+        resolver: yupResolver(schema), // Ele ajuda a validar os dados do campo schema
+    })
+    const onSubmit = (data) => console.log(data)
+
     return (
         <S.Container>
             <S.LeftContainer>
@@ -13,16 +37,16 @@ export function Login() {
                 <S.Title>Olá, seja bem vindo ao <span>Dev Burguer!</span>
                     <br />
                     Acesse com seu <span>Login e senha.</span></S.Title>
-                <S.Form >
+                <S.Form onSubmit={handleSubmit(onSubmit)}>
                     <S.InputContainer>
                         <label>Email</label>
-                        <input type="email" />
+                        <input type="email" {...register("email")} />
                     </S.InputContainer>
                     <S.InputContainer>
                         <label>Senha</label>
-                        <input type="password" />
+                        <input type="password" {...register("password")} />
                     </S.InputContainer>
-                    <Button>ENTRAR</Button>
+                    <Button type="submit">ENTRAR</Button>
                 </S.Form>
                 <p>Não possui conta? <a href='link'>Clique aqui.</a></p>
             </S.RigthContainer>
