@@ -11,12 +11,12 @@ export function Login() {
     const schema = yup.object({  // validação dos campos
         email: yup
             .string() // se é uma estringe.
-            .email() // 'Digite um email válido'
-            .required(), // 'O email é obrigatório'
+            .email('Digite um email válido!') // 'Digite um email válido'
+            .required('O email é obrigatório!'), // 'O email é obrigatório'
         password: yup
             .string() // se é uma estringe.
-            .min(6) // 'A senha deve ter pelo menos 6 caracteres' 
-            .required(), // 'A senha é obrigatória'
+            .min(6, 'A senha deve ter pelo menos 6 caracteres!') // 'A senha deve ter pelo menos 6 caracteres' 
+            .required('A senha é obrigatória!'), // 'A senha é obrigatória'
     }).required();
 
     const {
@@ -26,6 +26,7 @@ export function Login() {
     } = useForm({
         resolver: yupResolver(schema), // Ele ajuda a validar os dados do campo schema
     })
+
     const onSubmit = (data) => console.log(data)
 
     return (
@@ -41,10 +42,12 @@ export function Login() {
                     <S.InputContainer>
                         <label>Email</label>
                         <input type="email" {...register("email")} />
+                        <p>{errors?.email?.message}</p>
                     </S.InputContainer>
                     <S.InputContainer>
                         <label>Senha</label>
                         <input type="password" {...register("password")} />
+                        <p>{errors?.password?.message}</p>
                     </S.InputContainer>
                     <Button type="submit">ENTRAR</Button>
                 </S.Form>
