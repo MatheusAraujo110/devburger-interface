@@ -30,7 +30,7 @@ export function Login() {
     })
 
     const onSubmit = async (data) => {
-        const response = await toast.promise(
+        toast.promise(
             api.post('/session', {
                 email: data.email,
                 password: data.password,
@@ -41,8 +41,13 @@ export function Login() {
                 error: 'Email ou Senha incorreta! 😞'
             }
         )
-        console.log(response)
-    }
+            .then(response => {
+                console.log(response)
+            })
+            .catch(error => {
+                console.error(error)
+            });
+    };
 
     return (
         <S.Container>
