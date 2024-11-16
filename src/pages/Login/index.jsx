@@ -1,11 +1,13 @@
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
+import { toast } from "react-toastify"
 import * as yup from "yup"
 
 import * as S from './styles'
 import Logo from '../../assets/Logo 1.svg'
-
 import { Button } from '../../components/Button'
+import { api } from "../../services/api"
+
 
 export function Login() {
     const schema = yup.object({  // validação dos campos
@@ -27,7 +29,20 @@ export function Login() {
         resolver: yupResolver(schema), // Ele ajuda a validar os dados do campo schema
     })
 
-    const onSubmit = (data) => console.log(data)
+    const onSubmit = async (data) => {
+        const response = await toast.promise(
+            api.post('/session', {
+                email: data.email,
+                password: data.password,
+            }),
+            {
+                pending: 'Carregando os dados...',
+                success: 'Dados carregados com sucesso! 🎉',
+                error: 'Email ou Senha incorreta! 😞'
+            }
+        )
+        console.log(response)
+    }
 
     return (
         <S.Container>
