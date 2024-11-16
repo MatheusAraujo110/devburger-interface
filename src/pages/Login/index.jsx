@@ -49,7 +49,7 @@ export function Login() {
                         <input type="password" {...register("password")} />
                         <p>{errors?.password?.message}</p>
                     </S.InputContainer>
-                    <Button type="submit">ENTRAR</Button>
+                    <Button type="submit">Entrar</Button>
                 </S.Form>
                 <p>Não possui conta? <a href='link'>Clique aqui.</a></p>
             </S.RigthContainer>

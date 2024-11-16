@@ -21,6 +21,7 @@ export const colors = {
   black2: "#1e1e1e",
   purple: "#9758A6",
   purpleHover: "#6F357C",
+  red: "#cf3057",
 }
 
 export default GlobalStyle
