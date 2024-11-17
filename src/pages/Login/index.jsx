@@ -41,12 +41,12 @@ export function Login() {
                 error: 'Email ou Senha incorreta! 😞'
             }
         )
-            .then(response => {
-                console.log(response)
-            })
-            .catch(error => {
-                console.error(error)
-            });
+            // .then(response => {
+            //     console.log(response)
+            // })
+            // .catch(error => {
+            //     console.error(error)
+            // });
     };
 
     return (

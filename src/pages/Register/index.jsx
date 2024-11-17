@@ -35,24 +35,26 @@ export function Register() {
     })
 
     const onSubmit = async (data) => {  // data => pega todas as informações que está chegando do formulário.
-        toast.promise(
-            api.post('/users', {
+        try {
+            const { status } = await api.post('/users', {
                 name: data.name,
                 email: data.email,
                 password: data.password,
-            }),
-            {
-                pending: 'Carregando os dados...',
-                success: 'Cadastro realizado com sucesso! 🎉',
-                error: 'Ops, algo deu errado! 😞'
+            },
+                {
+                    validateStatus: () => true,
+                },
+            )
+            if (status === 200 || status === 201) {
+                toast.success('Conta criada com Sucesso')
+            } else if (status === 400 || status === 409) {
+                toast.error('E-mail já cadastrado! Faça login para continuar.')
+            } else {
+                throw new Error() // Imediatamente, ele joga dentro do catch.
             }
-        )
-            .then(response => {
-                console.log(response)
-            })
-            .catch(error => {
-                console.error(error)
-            });
+        } catch (error) {
+            toast.error("Falha no sistema! Tente novamente.")
+        }
     };
 
     return (
