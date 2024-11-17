@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form"
+import { useNavigate } from "react-router-dom"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { toast } from "react-toastify"
 import * as yup from "yup"
@@ -10,6 +11,8 @@ import { api } from "../../services/api"
 
 
 export function Login() {
+    const navigate = useNavigate()
+
     const schema = yup.object({  // validação dos campos
         email: yup
             .string() // se é uma estringe.
@@ -30,24 +33,37 @@ export function Login() {
     })
 
     const onSubmit = async (data) => {
-        toast.promise(
-            api.post('/session', {
+        try {
+            // Envia a requisição para a API
+            const { response } = await api.post('/session', {
                 email: data.email,
                 password: data.password,
-            }),
-            {
-                pending: 'Carregando os dados...',
-                success: 'Dados carregados com sucesso! 🎉',
-                error: 'Email ou Senha incorreta! 😞'
+            });
+
+            // Se a requisição for bem-sucedida, exibe a notificação de sucesso
+            toast.success('Dados carregados com sucesso! 🎉');
+
+            // Navega para a página de home após o sucesso
+            navigate('/home');
+
+        } catch (error) {
+            // Se a requisição falhar, exibe a notificação de erro
+            if (error.response && error.response.status === 401) {
+                // Verifica se o erro é de autenticação (ex: email/senha incorretos)
+                toast.error('Email ou Senha incorreta! 😞');
+            } else {
+                // Caso ocorra outro erro (ex: problema de rede)
+                toast.error('Houve um erro inesperado. Tente novamente! 😞');
             }
-        )
-            // .then(response => {
-            //     console.log(response)
-            // })
-            // .catch(error => {
-            //     console.error(error)
-            // });
+        }
     };
+
+    // .then(response => {
+    //     console.log(response)
+    // })
+    // .catch(error => {
+    //     console.error(error)
+    // });
 
     return (
         <S.Container>
@@ -71,7 +87,7 @@ export function Login() {
                     </S.InputContainer>
                     <Button type="submit">Entrar</Button>
                 </S.Form>
-                <p>Não possui conta? <a href='link'>Clique aqui.</a></p>
+                <p>Não possui conta? <S.Link href='link' to="/cadastro">Clique aqui.</S.Link></p>
             </S.RigthContainer>
         </S.Container>
     )

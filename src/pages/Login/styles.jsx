@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link as ReactLink } from "react-router-dom";
 import { remCalc } from "../../utils/remCalc";
 import { colors } from "../../styles";
 
@@ -97,4 +98,9 @@ export const InputContainer = styled.div`
     font-weight: 600;
     height: ${remCalc(10)};
   }
+`
+
+export const Link = styled(ReactLink)`
+  text-decoration: none;
+  color: ${colors.white};
 `

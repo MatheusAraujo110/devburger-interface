@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form"
+import { useNavigate } from "react-router-dom"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { toast } from "react-toastify"
 import * as yup from "yup"
@@ -10,6 +11,8 @@ import { api } from "../../services/api"
 
 
 export function Register() {
+    const navigate = useNavigate()
+
     const schema = yup.object({  // validação dos campos
         name: yup.string().required('O nome é obrigatório'),
         email: yup
@@ -35,6 +38,9 @@ export function Register() {
     })
 
     const onSubmit = async (data) => {  // data => pega todas as informações que está chegando do formulário.
+        setTimeout(() => {
+            navigate('/login')
+        }, 2000);
         try {
             const { status } = await api.post('/users', {
                 name: data.name,
@@ -87,7 +93,7 @@ export function Register() {
                     </S.InputContainer>
                     <Button type="submit">Confirmar Cadastro</Button>
                 </S.Form>
-                <p>Já possui conta? <a href='link'>Clique aqui.</a></p>
+                <p>Já possui conta? <S.Link href='link' to="/login">Clique aqui.</S.Link></p>
             </S.RigthContainer>
         </S.Container>
     )

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { remCalc } from "../../utils/remCalc";
 import { colors } from "../../styles";
+import { Link as ReactLink } from 'react-router-dom'
 
 import BackgroundLogin from '../../assets/Background-Login.svg'
 import Background from '../../assets/Background.svg'
@@ -92,4 +93,9 @@ export const InputContainer = styled.div`
     font-weight: 600;
     height: ${remCalc(10)};
   }
+`
+
+export const Link = styled(ReactLink)`
+  text-decoration: none;
+  color: ${colors.white};
 `
