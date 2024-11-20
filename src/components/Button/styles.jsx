@@ -17,4 +17,9 @@ export const ContainerButton = styled.button`
    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='5' ry='5' stroke='white' stroke-width='3' stroke-dasharray='6%2c 14' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
    border-radius: ${remCalc(5)};
    }
+
+   &:active {
+      opacity: 0.9;
+      box-shadow: 1px 1px 10px 5px #9758A6;
+   }
 `

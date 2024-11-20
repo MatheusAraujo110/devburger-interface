@@ -4,8 +4,7 @@ import { colors } from "../../styles";
 import { Link as ReactLink } from 'react-router-dom'
 
 import BackgroundLogin from '../../assets/Background-Login.svg'
-import Background from '../../assets/Background.svg'
-
+import Background from '../../assets/Group 195.svg'
 export const Container = styled.div`
   display: flex;
   width: 100vw;
@@ -23,7 +22,7 @@ export const LeftContainer = styled.div`
   justify-content: center;
 
   img {
-    width: 80%;
+    width: 60%;
   }
 `
 
@@ -74,7 +73,7 @@ export const InputContainer = styled.div`
   input {
     width: 100%;
     border: none;
-    height: ${remCalc(52)};
+    height: ${remCalc(40)};
     border-radius: ${remCalc(5)};
     padding: ${remCalc(0)} ${remCalc(16)};
     font-size: ${remCalc(17)};
