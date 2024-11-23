@@ -19,8 +19,10 @@ export const GlobalStyle = createGlobalStyle`
 
 export const colors = {
   white: "#FFF",
+  white1: "#f0f0f0",
   black1: "#363636;",
   black2: "#1e1e1e",
+  black3: "#1f1f1f",
   purple: "#9758A6",
   purpleHover: "#6F357C",
   red: "#cf3057",

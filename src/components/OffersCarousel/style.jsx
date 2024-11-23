@@ -5,6 +5,7 @@ import { colors } from '../../styles'
 export const Container = styled.div`
   .carousel-item {
     padding-right: ${remCalc(40)};
+    margin-bottom: ${remCalc(64)};
     }
     overflow-x: hidden;
 

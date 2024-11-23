@@ -26,5 +26,4 @@ export const Container = styled.section`
     rgb(225, 225, 225,  0.5),
      rgb(99, 2, 111,  30%)),
       url('${Backgroud}');
-  height: ${remCalc(750)};
 `
