@@ -8,6 +8,16 @@ export const Container = styled.div`
     }
 
     padding-left: ${remCalc(40)};
+
+    .react-multiple-carousel__arrow--left {
+      left: ${remCalc(15)};
+      top: ${remCalc(10)};
+    }
+
+    .react-multiple-carousel__arrow--right {
+      right: ${remCalc(15)};
+      top: ${remCalc(10)};
+    }
 `
 
 export const Title = styled.h2`

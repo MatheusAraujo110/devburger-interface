@@ -7,7 +7,7 @@ export function CardProduct({ product }) {
             <S.CardIamge src={product.url} alt={product.name} />
             <div>
                 <p>{product.name}</p>
-                <strong>R${product.price}</strong>
+                <strong>{product.currencyValue}</strong>
             </div>
             <CardButton></CardButton>
         </S.Container>

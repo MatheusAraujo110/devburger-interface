@@ -12,6 +12,16 @@ export const Container = styled.div`
       overflow: visible;
     }
 
+    .react-multiple-carousel__arrow--left {
+      left: ${remCalc(15)};
+      top: ${remCalc(10)};
+    }
+
+    .react-multiple-carousel__arrow--right {
+      right: ${remCalc(15)};
+      top: ${remCalc(10)};
+    }
+
     padding-left: ${remCalc(40)};
 `
 

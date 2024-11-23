@@ -6,7 +6,7 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: ${remCalc(20)};
+    gap: ${remCalc(40)};
     padding: ${remCalc(20)};
     border-radius: ${remCalc(8)};
     background-color: ${colors.white};
@@ -19,6 +19,7 @@ export const Container = styled.div`
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        gap: ${remCalc(5)};
 
         p {
             font-size: ${remCalc(18)};
