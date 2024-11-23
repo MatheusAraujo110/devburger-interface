@@ -20,6 +20,5 @@ export const ContainerButton = styled.button`
 
    &:active {
       opacity: 0.9;
-      box-shadow: 1px 1px 10px 5px #9758A6;
    }
 `

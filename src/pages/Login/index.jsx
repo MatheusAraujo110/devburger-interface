@@ -33,29 +33,28 @@ export function Login() {
     })
 
     const onSubmit = async (data) => {
-        try {
-            // Envia a requisição para a API
-            const { response } = await api.post('/session', {
+        const {
+            data: { token },
+        } = await toast.promise(
+            api.post('/session', {
                 email: data.email,
                 password: data.password,
-            });
+            }),
+            {
+                pending: 'Verificando seus dados',
+                success: {
+                    render() {
+                        setTimeout(() => {
+                            navigate('/');
+                        }, 2000);
+                        return ('Seja Bem-Vindo(a)')
+                    },
+                },
+                error: 'Email ou Senha Incorretos 🤯',
+            },
+        );
 
-            // Se a requisição for bem-sucedida, exibe a notificação de sucesso
-            toast.success('Dados carregados com sucesso! 🎉');
-
-            // Navega para a página de home após o sucesso
-            navigate('/home');
-
-        } catch (error) {
-            // Se a requisição falhar, exibe a notificação de erro
-            if (error.response && error.response.status === 401) {
-                // Verifica se o erro é de autenticação (ex: email/senha incorretos)
-                toast.error('Email ou Senha incorreta! 😞');
-            } else {
-                // Caso ocorra outro erro (ex: problema de rede)
-                toast.error('Houve um erro inesperado. Tente novamente! 😞');
-            }
-        }
+        localStorage.setItem('token', token);
     };
 
     // .then(response => {
