@@ -58,12 +58,17 @@ export const CategoryButton = styled(Link)`
     text-decoration: none;
     cursor: pointer;
     background: none;
-    color: ${colors.purple};
+    color: ${(props) => props.$isActive ? colors.green : colors.purple};
     font-size: ${remCalc(25)};
     font-weight: 500;
     padding-bottom: ${remCalc(10)};
     line-height: ${remCalc(20)};
-    border-bottom: ${remCalc(3)} solid ${colors.purple};
+    border: none;
+    border-bottom: ${(props) => props.$isActive && `${remCalc(3)} solid ` + colors.green}; // Cor da borda quando o botão estiver ativo.
+
+    &:active {
+        opacity: 0.2;
+    }
 `
 
 export const ProductsContainer = styled.div`

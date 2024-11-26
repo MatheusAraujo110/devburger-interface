@@ -4,21 +4,38 @@ import { useEffect, useState } from 'react'
 import { api } from '../../services/api'
 import { formatPrice } from "../../utils/formatPrice";
 import { CardProduct } from '../../components/CardProduct';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 
 export default function Menu() {
     const [categories, setCategories] = useState([])
     const [products, setProducts] = useState([])
+    const [filteredProducts, setFilteredProducts] = useState([])
+
+    const navigate = useNavigate()
+
+    const { search } = useLocation() // pega a url.
+
+    const queryparams = new URLSearchParams(search)  // pega os parametros da url.
+
+    const [activeCategory, setActiveCategory] = useState(() => {
+        const categoryId = +queryparams.get('categoria') // pega o id da categoria.
+        if (categoryId) {
+            return Number(categoryId)  // retorna o id da categoria.
+        }
+        return 0
+    })
+
 
     useEffect(() => {
         async function loadCategories() {
-            const { data } = await api.get('/categories')
+            const { data } = await api.get('/categories') // pega todas as categorias.
 
-            const newCategories = [{
-                id: 0,
-                name: 'Todos',
-            }, ...data]
-            setCategories(newCategories)
+            const newCategories = [{ // adiciona a categoria todos.
+                id: 0, // id da categoria.
+                name: 'Todos', // nome da categoria.
+            }, ...data] // adiciona as outras categorias.
+            setCategories(newCategories) // seta as categorias.
         }
         async function loadProducts() {
             const { data } = await api.get('/products')
@@ -31,9 +48,18 @@ export default function Menu() {
 
             setProducts(newProducts)
         }
-        loadCategories()
-        loadProducts()
+        loadCategories() // chama a função.
+        loadProducts() // chama a função.
     }, [])
+
+    useEffect(() => {
+        if (activeCategory === 0) { // se a categoria for igual a 0 ele vai pegar todos os produtos.
+            setFilteredProducts(products) // vai pegar todos os produtos
+        } else {
+            const newFilteredProducts = products.filter((product) => product.category_id === activeCategory) // filtra os produtos por categoria.
+            setFilteredProducts(newFilteredProducts) // vai pegar os produtos filtrados.
+        }
+    }, [products, activeCategory]) // dependencia dos produtos e da categoria.
 
     return (
         <S.Container>
@@ -49,12 +75,27 @@ export default function Menu() {
             </S.Banner>
             <S.CategoryMenu>
                 {categories.map((category) => (
-                    <S.CategoryButton key={category.id}>{category.name}</S.CategoryButton>
+                    <S.CategoryButton
+                        key={category.id}
+                        $isActive={category.id === activeCategory}
+                        onClick={() => {
+                            navigate( // navega para a rota cardapio.
+                                {
+                                    pathname: '/cardapio',
+                                    search: `?categoria=${category.id}`,
+                                },
+                                {
+                                    replace: true, // substitui a rota atual.
+                                },
+                                setActiveCategory(category.id)
+                            )
+                        }}
+                    >{category.name}</S.CategoryButton>
                 ))}
             </S.CategoryMenu>
 
             <S.ProductsContainer>
-                {products.map((product) => (
+                {filteredProducts.map((product) => (
                     <CardProduct product={product} key={product.id} />
                 ))}
             </S.ProductsContainer>

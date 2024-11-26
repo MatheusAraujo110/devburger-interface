@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { remCalc } from '../../utils/remCalc'
 import { colors } from '../../styles'
+import { Link } from "react-router-dom";
 
 export const Container = styled.div`
   .carousel-item {
@@ -53,13 +54,18 @@ export const ContainerItems = styled.div`
     width: 80%;
     height: ${remCalc(210)};
     cursor: grab;
+`
 
-    p {
-        color: ${colors.white};
-        background-color: rgba(0,0,0, 0.5);
-        padding: ${remCalc(10)} ${remCalc(30)};
-        border-radius: ${remCalc(30)};
-        font-size: ${remCalc(18)};
-        font-weight: bold;
-    }
+export const CategoryButton = styled(Link)`
+   color: ${colors.white};
+   background-color: rgba(0,0,0, 0.5);
+   padding: ${remCalc(10)} ${remCalc(30)};
+   border-radius: ${remCalc(30)};
+   font-size: ${remCalc(18)};
+   font-weight: 500;
+   text-decoration: none;
+
+   &:hover{
+    background-color: ${colors.purple};
+   }
 `
