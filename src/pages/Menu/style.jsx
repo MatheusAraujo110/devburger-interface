@@ -80,3 +80,30 @@ export const ProductsContainer = styled.div`
     max-width: ${remCalc(1280)};
     margin: ${remCalc(50)} auto;
 `
+
+export const ButtonBack = styled.button`
+    display: flex;
+    align-items: center;
+    margin: ${remCalc(20)} ${remCalc(20)};
+    padding: ${remCalc(15)};
+    background-color: ${colors.purple};
+    color: ${colors.white};
+    font-size: ${remCalc(15)};
+    border: none;
+    border-radius: ${remCalc(25)};
+    cursor: pointer;
+    gap: ${remCalc(10)};
+
+    &:hover {
+        background-color: ${colors.purpleHover};
+    }
+
+    &:active {
+      opacity: 0.6;
+    }
+
+    img {
+        width: ${remCalc(10)};
+        transform: scale(-1);
+    }
+`

@@ -6,6 +6,8 @@ import { formatPrice } from "../../utils/formatPrice";
 import { CardProduct } from '../../components/CardProduct';
 import { useLocation, useNavigate } from 'react-router-dom';
 
+import Seta from '../../assets/Seta.svg'
+
 
 export default function Menu() {
     const [categories, setCategories] = useState([])
@@ -25,7 +27,9 @@ export default function Menu() {
         }
         return 0
     })
-
+    const handleBack = () => {
+        navigate(-1); // Navega para a página anterior
+    };
 
     useEffect(() => {
         async function loadCategories() {
@@ -73,6 +77,9 @@ export default function Menu() {
                     <span>Esse cardápio está irresistível!</span>
                 </h1>
             </S.Banner>
+            <S.ButtonBack onClick={handleBack}> <img src={Seta} alt="seta" />
+                Voltar
+            </S.ButtonBack>
             <S.CategoryMenu>
                 {categories.map((category) => (
                     <S.CategoryButton
