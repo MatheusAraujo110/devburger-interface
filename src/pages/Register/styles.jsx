@@ -88,7 +88,7 @@ export const InputContainer = styled.div`
   p {
     font-size: ${remCalc(14)};
     line-height: 80%;
-    color: ${colors.red};
+    color: ${colors.red2};
     font-weight: 600;
     height: ${remCalc(10)};
   }

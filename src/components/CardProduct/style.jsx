@@ -11,7 +11,7 @@ export const Container = styled.div`
     border-radius: ${remCalc(8)};
     background-color: ${colors.white};
     cursor: grab;
-    box-shadow:rgba(1, 1, 1, 1.35) 0px 5px 15px;
+    box-shadow:rgb(240 14 255) 0px 5px 15px;
     position: relative; 
 
     div {

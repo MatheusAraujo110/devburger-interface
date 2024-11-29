@@ -68,4 +68,8 @@ export const CategoryButton = styled(Link)`
    &:hover{
     background-color: ${colors.purple};
    }
+
+   &:active{
+    opacity: 0.6;
+   }
 `
