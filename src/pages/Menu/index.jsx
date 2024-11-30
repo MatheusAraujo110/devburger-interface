@@ -7,6 +7,7 @@ import { CardProduct } from '../../components/CardProduct';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import Seta from '../../assets/Seta.svg'
+import Footer from '../../components/Footer';
 
 
 export default function Menu() {
@@ -106,6 +107,7 @@ export default function Menu() {
                     <CardProduct product={product} key={product.id} />
                 ))}
             </S.ProductsContainer>
+            <Footer />
         </S.Container>
     )
 }

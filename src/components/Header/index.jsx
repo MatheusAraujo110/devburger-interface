@@ -5,7 +5,7 @@ import { useUser } from "../../hooks/UserContext"
 import { Container, Navigate, HeaderLink, Options, Profile, Logout, LinkContainer, Content } from "./style";
 export function Header() {
     const navigate = useNavigate()
-    const { logout, userInfo } = useUser() 
+    const { logout, userInfo } = useUser()
 
     const { pathname } = useResolvedPath()
 
@@ -33,8 +33,10 @@ export function Header() {
                         <Logout onClick={logoutUser}>Sair</Logout>
                     </Profile>
                     <LinkContainer>
-                        <ShoppingCartSimple size={26} color="#fff" />
-                        <HeaderLink>Carrinho</HeaderLink>
+                        {/* <ShoppingCartSimple size={26} color="#fff" /> */}
+                        <HeaderLink to={"/carrinho"}>
+                            <ShoppingCartSimple size={26} color="#fff" />
+                        </HeaderLink>
                     </LinkContainer>
                 </Options>
             </Content>

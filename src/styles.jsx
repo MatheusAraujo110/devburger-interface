@@ -26,6 +26,7 @@ export const colors = {
   black3: "#1f1f1f",
   purple: "#9758A6",
   purpleHover: "#6F357C",
+  purple2: "#5C2669",
   red: "#FF3205",
   red2: "#ff0000",
   green: "#61a120",

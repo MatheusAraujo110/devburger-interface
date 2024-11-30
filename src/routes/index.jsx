@@ -5,6 +5,7 @@ import { Register } from "../pages/Register"
 import { Home } from "../pages/Home"
 import Menu from "../pages/Menu";
 import { Header } from "../components/Header";
+import Cart from "../components/Cart";
 
 export const router = createBrowserRouter([
     {
@@ -32,5 +33,9 @@ export const router = createBrowserRouter([
                 <Menu />
             </>
         )
+    },
+    {
+        path: '/Carrinho',
+        element: <Cart />,
     },
 ])

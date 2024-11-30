@@ -2,6 +2,7 @@ import * as S from './style'
 
 import { CategoriesCarousel } from '../../components/CategoriesCarousel'
 import { OffersCarousel } from '../../components/OffersCarousel'
+import Footer from '../../components/Footer'
 
 export function Home() {
     return (
@@ -15,6 +16,7 @@ export function Home() {
                     <OffersCarousel />
                 </div>
             </S.Container>
+            <Footer />
         </main>
     )
 }
