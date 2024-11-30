@@ -8,7 +8,7 @@ import Texture from '../../assets/Texture.svg'
 export const Container = styled.div`
    width: 100%;
    background: linear-gradient(
-    rgb(225, 225, 225,  0.5),
+    rgb(225, 225, 225,  0.5),   
      rgb(225, 225, 11,  30%)),
       url('${Backgroud}');
    min-height: 100vh;
