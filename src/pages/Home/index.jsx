@@ -1,7 +1,6 @@
 import * as S from './style'
 
-import { CategoriesCarousel } from '../../components/CategoriesCarousel'
-import { OffersCarousel } from '../../components/OffersCarousel'
+import { CategoriesCarousel, OffersCarousel } from '../../components'
 import Footer from '../../components/Footer'
 
 export function Home() {
