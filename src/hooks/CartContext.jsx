@@ -23,20 +23,20 @@ export const CartProvider = ({ children }) => {  // Cria o contexto.
 
             setCartProducts(newProductInCart)
         }
-        updateLOcalStorage(newProductInCart)
+        updateLocalStorage(newProductInCart)
     } // Adiciona o produto no carrinho.
 
     const clearCart = () => {  // Limpa o carrinho. 
         setCartProducts([])
 
-        updateLOcalStorage([])
+        updateLocalStorage([])
     }
 
     const deleteProduct = (productId) => {  // Deleta o item do carrinho.
         const newCart = cartProducts.filter((prd) => prd.id !== productId)
 
         setCartProducts(newCart)
-        updateLOcalStorage(newCart)
+        updateLocalStorage(newCart)
     }
 
     const increaseProduct = (productId) => {  // Aumenta a quantidade do produto no carrinho.
@@ -44,7 +44,7 @@ export const CartProvider = ({ children }) => {  // Cria o contexto.
             return prd.id === productId ? { ...prd, quantity: prd.quantity + 1 } : prd
         })
         setCartProducts(newCart)
-        updateLOcalStorage(newCart)
+        updateLocalStorage(newCart)
     }
 
     const decreaseProduct = (productId) => {  // Diminui a quantidade do produto no carrinho.
@@ -56,13 +56,13 @@ export const CartProvider = ({ children }) => {  // Cria o contexto.
             })
 
             setCartProducts(newCart)
-            updateLOcalStorage(newCart)
+            updateLocalStorage(newCart)
         } else {
             deleteProduct(productId)
         }
     }
 
-    const updateLOcalStorage = (product) => {
+    const updateLocalStorage = (product) => {
         localStorage.setItem('devburguer:cartInfo', JSON.stringify(product))
     } // Atualiza o localStorage.
 

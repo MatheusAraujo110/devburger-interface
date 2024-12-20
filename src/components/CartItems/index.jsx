@@ -1,9 +1,12 @@
-import { Divide } from '@phosphor-icons/react'
 import { useCart } from '../../hooks/CartContext'
 import { Table } from '../index'
+import { formatPrice } from '../../utils/formatPrice'
+import * as S from './style'
+
+import TrashIcon from '../../assets/trash.svg'
 
 export function CartItems() {
-    const { cartProducts, incredeaseProduct, decreaseProduct } = useCart()
+    const { cartProducts, increaseProduct, decreaseProduct, deleteProduct } = useCart()
 
     return (
         <Table.Root>
@@ -14,6 +17,7 @@ export function CartItems() {
                     <Table.Th>Preço</Table.Th>
                     <Table.Th>Quantidade</Table.Th>
                     <Table.Th>Total</Table.Th>
+                    <Table.Th></Table.Th>
                 </Table.Tr>
             </Table.Header>
 
@@ -22,15 +26,35 @@ export function CartItems() {
                     cartProducts.map((product) => (
                         <Table.Tr key={product.id}>
                             <Table.Td>
-                                <img src={product.url} alt="imagem do produto" />
+                                <S.ProductImage src={product.url} alt="imagem do produto" />
                             </ Table.Td>
                             <Table.Td>{product.name}</Table.Td>
-                            <Table.Td>{product.currencyValue}</Table.Td>
+                            <Table.Td>
+                                <S.ButtonGroup>
+                                    <button onClick={() => decreaseProduct(product.id)}>-</button>
+                                    {product.currencyValue}
+                                    <button onClick={() => increaseProduct(product.id)}>+</button>
+                                </S.ButtonGroup>
+                            </Table.Td>
                             <Table.Td>{product.quantity}</Table.Td>
+                            <Table.Td>
+                                <S.TotalPrice>
+                                    {formatPrice(product.quantity * product.price)}
+                                </S.TotalPrice>
+                            </Table.Td>
+                            <Table.Td>
+                                <S.TrashImage src={TrashIcon} alt="icone de lixeira" onClick={() => deleteProduct(product.id)}></S.TrashImage>
+                            </Table.Td>
                         </Table.Tr>
                     ))
-                ) : <div>Seu carrinho esta vazio</div>}
+                ) : (
+                    <Table.Tr>
+                        <Table.Td colSpan="5">
+                            <S.EmptyCart>Seu carrinho está vazio</S.EmptyCart>
+                        </Table.Td>
+                    </Table.Tr>
+                )}
             </Table.Body>
-        </Table.Root>
+        </Table.Root >
     )
 }   
