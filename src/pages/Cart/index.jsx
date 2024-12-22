@@ -1,8 +1,7 @@
 import * as S from './style'
 import Logo from '../../assets/Logo 1.svg'
 
-import { CartItems } from '../../components/CartItems'
-import { CartResume } from '../../components/CartResume'
+import { CartItems, CartResume } from '../../components'
 
 export function Cart() {
     return (
