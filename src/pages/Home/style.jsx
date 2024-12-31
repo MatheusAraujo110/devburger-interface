@@ -9,7 +9,7 @@ export const Banner = styled.div`
   background: url('${BannerHome}');
   background-size: cover;
   background-position: center;
-  height: ${remCalc(368)};
+  height: ${remCalc(348)};
 
   h1 {
     font-family: "Road Rage", sans-serif;

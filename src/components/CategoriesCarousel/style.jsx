@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export const Container = styled.div`
   .carousel-item {
-    padding-right: ${remCalc(40)};
+    padding: ${remCalc(0)} ${remCalc(0)} ${remCalc(0)} ${remCalc(64)};
     margin-bottom: ${remCalc(20)};
     }
 
@@ -13,12 +13,12 @@ export const Container = styled.div`
 
     .react-multiple-carousel__arrow--left {
       left: ${remCalc(15)};
-      top: ${remCalc(10)};
+      top: ${remCalc(75)};
     }
 
     .react-multiple-carousel__arrow--right {
       right: ${remCalc(15)};
-      top: ${remCalc(10)};
+      top: ${remCalc(75)};
     }
 `
 

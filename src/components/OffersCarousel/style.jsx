@@ -4,7 +4,8 @@ import { colors } from '../../styles'
 
 export const Container = styled.div`
   .carousel-item {
-    padding-right: ${remCalc(40)};
+    width: ${remCalc(275)};
+    padding: ${remCalc(0)} ${remCalc(75)} ${remCalc(0)} ${remCalc(64)};
     margin-bottom: ${remCalc(64)};
     }
     overflow-x: hidden;
@@ -15,12 +16,12 @@ export const Container = styled.div`
 
     .react-multiple-carousel__arrow--left {
       left: ${remCalc(15)};
-      top: ${remCalc(10)};
+      top: ${remCalc(75)};
     }
 
     .react-multiple-carousel__arrow--right {
       right: ${remCalc(15)};
-      top: ${remCalc(10)};
+      top: ${remCalc(75)};
     }
 
     padding-left: ${remCalc(40)};
