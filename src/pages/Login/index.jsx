@@ -1,39 +1,40 @@
-import { useForm } from "react-hook-form"
-import { useNavigate } from "react-router-dom"
-import { yupResolver } from "@hookform/resolvers/yup"
-import { toast } from "react-toastify"
-import * as yup from "yup"
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { toast } from "react-toastify";
+import * as yup from "yup";
+import { FiEye, FiEyeOff } from "react-icons/fi"; // Importando os ícones
 
-import * as S from './styles'
-import Logo from '../../assets/Logo 1.svg'
-import { Button } from '../../components/Button'
-import { api } from "../../services/api"
-import { useUser } from "../../hooks/UserContext"
-
+import * as S from './styles';
+import Logo from '../../assets/Logo 1.svg';
+import { Button } from '../../components/Button';
+import { api } from "../../services/api";
+import { useUser } from "../../hooks/UserContext";
 
 export function Login() {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const { putUserData } = useUser();
+    const [showPassword, setShowPassword] = useState(false); // Estado para visibilidade da senha
 
-    const { putUserData } = useUser()
-
-    const schema = yup.object({  // validação dos campos
+    const schema = yup.object({
         email: yup
-            .string() // se é uma estringe.
-            .email('Digite um email válido!') // 'Digite um email válido'
-            .required('O email é obrigatório!'), // 'O email é obrigatório'
+            .string()
+            .email('Digite um email válido!')
+            .required('O email é obrigatório!'),
         password: yup
-            .string() // se é uma estringe.
-            .min(6, 'A senha deve ter pelo menos 6 caracteres!') // 'A senha deve ter pelo menos 6 caracteres' 
-            .required('A senha é obrigatória!'), // 'A senha é obrigatória'
+            .string()
+            .min(6, 'A senha deve ter pelo menos 6 caracteres!')
+            .required('A senha é obrigatória!'),
     }).required();
 
     const {
-        register, // Registrar os inputs
-        handleSubmit, // Vai lidar com as informações do formulário
+        register,
+        handleSubmit,
         formState: { errors },
     } = useForm({
-        resolver: yupResolver(schema), // Ele ajuda a validar os dados do campo schema
-    })
+        resolver: yupResolver(schema),
+    });
 
     const onSubmit = async (data) => {
         const { data: userData } = await toast.promise(
@@ -48,14 +49,14 @@ export function Login() {
                         setTimeout(() => {
                             navigate('/');
                         }, 2000);
-                        return ('Seja Bem-Vindo(a)')
+                        return ('Seja Bem-Vindo(a)');
                     },
                 },
                 error: 'Email ou Senha Incorretos 🤯',
             },
         );
 
-        putUserData(userData)
+        putUserData(userData);
     };
 
     return (
@@ -75,7 +76,27 @@ export function Login() {
                     </S.InputContainer>
                     <S.InputContainer>
                         <label>Senha</label>
-                        <input type="password" {...register("password")} />
+                        <div style={{ position: 'relative' }}>
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                {...register("password")}
+                            />
+                            <button
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                                style={{
+                                    position: 'absolute',
+                                    right: '10px',
+                                    top: '50%',
+                                    transform: 'translateY(-50%)',
+                                    background: 'none',
+                                    border: 'none',
+                                    cursor: 'pointer',
+                                }}
+                            >
+                                {showPassword ? <FiEye size={20} /> : <FiEyeOff size={20} />}
+                            </button>
+                        </div>
                         <p>{errors?.password?.message}</p>
                     </S.InputContainer>
                     <Button type="submit">Entrar</Button>
@@ -83,7 +104,7 @@ export function Login() {
                 <p>Não possui conta? <S.Link href='link' to="/cadastro">Clique aqui.</S.Link></p>
             </S.RigthContainer>
         </S.Container>
-    )
+    );
 }
 
-export default Login
+export default Login;
