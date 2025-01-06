@@ -49,7 +49,7 @@ export function Orders() {
                         <TableCell>Pedido</TableCell>
                         <TableCell>Cliente</TableCell>
                         <TableCell>Data do pedido</TableCell>
-                        <TableCell>Carbs&nbsp;(g)</TableCell>
+                        <TableCell>Status</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
