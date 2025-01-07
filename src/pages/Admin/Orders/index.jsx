@@ -57,6 +57,22 @@ export function Orders() {
         setActiveStatus(status.id)
     }
 
+    useEffect(() => {
+        if (activeStatus === 0) {
+            setFilteredOrders(orders);
+        } else {
+            const statusIndex = orderStatusOptions.findIndex((item) => item.id === activeStatus);
+            if (statusIndex !== -1) { // Certifique-se de que o índice é válido
+                const newFilteredOrders = orders.filter((order) => order.status === orderStatusOptions[statusIndex].value);
+                setFilteredOrders(newFilteredOrders);
+            } else {
+                console.warn("activeStatus não corresponde a nenhum item em orderStatusOptions");
+                setFilteredOrders([]); // ou mantenha os pedidos sem filtrar
+            }
+        }
+    }, [orders, activeStatus, orderStatusOptions]); // Inclua activeStatus e orderStatusOptions como dependências
+
+
     return (
         <>
             <Filter>
