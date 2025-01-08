@@ -13,9 +13,9 @@ import { api } from "../../services/api";
 import { useUser } from "../../hooks/UserContext";
 
 export function Login() {
-    const navigate = useNavigate();
-    const { putUserData } = useUser();
-    const [showPassword, setShowPassword] = useState(false); // Estado para visibilidade da senha
+    const navigate = useNavigate()
+    const { putUserData } = useUser()
+    const [showPassword, setShowPassword] = useState(false) // Estado para visibilidade da senha
 
     const schema = yup.object({
         email: yup
@@ -98,7 +98,7 @@ export function Login() {
                                     cursor: 'pointer',
                                 }}
                             >
-                                {showPassword ? <FiEye size={20} /> : <FiEyeOff size={20} />}
+                                {showPassword ? <FiEyeOff size={20} /> : <FiEye size={20} />}
                             </button>
                         </div>
                         <p>{errors?.password?.message}</p>

@@ -8,10 +8,13 @@ import * as S from './styles'
 import Logo from '../../assets/Logo 1.svg'
 import { Button } from '../../components/Button'
 import { api } from "../../services/api"
+import { useState } from "react"
+import { FiEye, FiEyeOff } from "react-icons/fi";
 
 
 export function Register() {
     const navigate = useNavigate()
+    const [showPassword, setShowPassword] = useState(false)
 
     const schema = yup.object({  // validação dos campos
         name: yup.string().required('O nome é obrigatório'),
@@ -83,12 +86,35 @@ export function Register() {
                     </S.InputContainer>
                     <S.InputContainer>
                         <label>Senha</label>
-                        <input type="password" {...register("password")} />
+                        <input
+                            type={showPassword ? "text" : "password"}
+                            {...register("password")}
+                        />
                         <p>{errors?.password?.message}</p>
                     </S.InputContainer>
                     <S.InputContainer>
                         <label>Confirmar senha</label>
-                        <input type="password" {...register("confimrPassword")} />
+                        <div style={{ position: 'relative' }}>
+                            <input type={showPassword ? "text" : "password"}
+                                {...register("confimrPassword")} />
+                            <button
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                                style={{
+                                    position: 'absolute',
+                                    right: '10px',
+                                    top: '50%',
+                                    transform: 'translateY(-50%)',
+                                    background: 'none',
+                                    border: 'none',
+                                    cursor: 'pointer',
+                                }}
+                            >
+                                {showPassword ? <FiEyeOff size={20} /> : <FiEye size={20} />}
+                            </button>
+                        </div>
+                        {/* <input type={showPassword ? "text" : "password"}
+                            {...register("confimrPassword")} /> */}
                         <p>{errors?.confimrPassword?.message}</p>
                     </S.InputContainer>
                     <Button type="submit">Confirmar Cadastro</Button>
