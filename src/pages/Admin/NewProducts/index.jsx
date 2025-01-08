@@ -6,12 +6,14 @@ import { Controller, useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { useEffect, useState } from "react"
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom'
 
 const schema = yup
     .object({
         name: yup.string().required('O nome do produto é obrigatório'),
         price: yup.number().positive().required('O preço do produto é obrigatório').typeError('O preço do produto é obrigatório'),
         category: yup.object().required('Escolha uma categoria'),
+        offer: yup.bool(),
         file: yup.mixed().test('required', 'Escolha uma imagem', (value) => {
             return value && value.length > 0
         }).test('fileSize', 'Arquivo muito grande', (value) => {
@@ -25,6 +27,7 @@ const schema = yup
 export function NewProducts() {
     const [fileName, setFileName] = useState('')
     const [categories, setCategories] = useState([])
+    const navigate = useNavigate()
 
     useEffect(() => {
         async function loadCategories() {
@@ -50,12 +53,17 @@ export function NewProducts() {
         productFormData.append('price', data.price * 100)
         productFormData.append('category_id', data.category.id)
         productFormData.append('file', data.file[0])
+        productFormData.append('offer', data.offer)
 
         await toast.promise(api.post('/products', productFormData), {
             pending: 'Criando produto...',
             success: 'Produto criado com sucesso!',
             error: 'Falha ao criar produto!',
         })
+
+        setTimeout(() => {
+            navigate('/admin/produtos')
+        }, 1000);
     }
 
     return (
@@ -107,6 +115,14 @@ export function NewProducts() {
                         )}
                     />
                     <S.ErrorMessage>{errors?.category?.message}</S.ErrorMessage>
+                </S.InputGroup>
+                <S.InputGroup>
+                    <S.ContainerCheckbox>
+                        <input
+                            type="checkbox"
+                            {...register('offer')} />
+                        <S.Label> Produto em oferta?</S.Label>
+                    </S.ContainerCheckbox>
                 </S.InputGroup>
                 <S.SubmitButton>
                     Adicionar produto
